@@ -6,6 +6,7 @@ target/
 
 ### AWS ###
 .aws
+.aws-sam
 
 ### STS ###
 .apt_generated

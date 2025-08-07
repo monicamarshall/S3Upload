@@ -1,10 +1,53 @@
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main  (Switches the default master branch to main branch)
+git remote add origin git@github.com:monicamarshall/S3Upload.git
+git push -u origin main
+
+
+…or push an existing repository from the command line
+git remote add origin git@github.com:monicamarshall/S3Upload.git
+git branch -M main
+git push -u origin main
+  
+
+
 # ordersapi
 
-This project contains source code and supporting files for a serverless application that you can deploy with the SAM CLI. It includes the following files and folders.
+This project contains source code and supporting files for various serverless applications that you can deploy with the SAM CLI. 
+It includes the following files and folders.
+
+-S3Upload:  
+
+This springboot application is built, deployed, and run as a Lambda function.
+
+This springboot application downloads files from:
+https://download.bls.gov/pub/time.series/pr/
+
+and stores them in S3.  The bucket is publicly available.  
+
+403 Forbidden errors are due to BLS data access policies.  The BLS data access policies can be found here: https://www.bls.gov/bls/pss.htm
+
+The policy page says:  BLS also reserves the right to block robots that do not contain information that can be used to contact the owner. Blocking may occur in real time.
+
+Adding a User-Agent header to the HTTP request with contact information will comply with the BLS data policies
+ and allow you to keep accessing their data programmatically.
+
+The files in the S3 bucket are kept in sync with the source when data on the website is updated, added, or deleted.
+The app adds and/or removes files.
+
+The app downloads files from this public url also:  https://honolulu-api.datausa.io/tesseract/data.jsonrecords?cube=acs_yg_total_population_1&drilldowns=Year%2CNation&locale=en&measures=Population
+
+The population.json file is also uploaded to S3.
+
 
 - HelloWorldFunction/src/main - Code for the application's Lambda function.
+
 - events - Invocation events that you can use to invoke the function.
+
 - HelloWorldFunction/src/test - Unit tests for the application code. 
+
 - template.yaml - A template that defines the application's AWS resources.
 
 The application uses several AWS resources, including Lambda functions and an API Gateway API. These resources are defined in the `template.yaml` file in this project. You can update the template to add AWS resources through the same deployment process that updates your application code.
