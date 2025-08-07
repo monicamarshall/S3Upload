@@ -25,7 +25,7 @@ git push -u origin main
 
 This project contains source code and supporting files for various serverless applications that you can deploy with the SAM CLI. It includes the following files and folders.
 
-# -S3Upload:  
+# -S3Upload Lambda Function:  
 
 This springboot application is built, deployed, and run as a Lambda function.
 
@@ -49,14 +49,16 @@ https://honolulu-api.datausa.io/tesseract/data.jsonrecords?cube=acs_yg_total_pop
 
 The population.json file is also uploaded to S3.
 
+The ordersapi offers 3 service endpoints (Refer to template.yaml for service endpoint configuration):
 
-- HelloWorldFunction/src/main - Code for the application's Lambda function.
+# -CreateOrderFunction:  This is a POST service that takes a json order and saves it in DynamoDB
+# -ReadOrderFunction:  This is a GET service that reads all Order objects from DynamoDB
+# -S3Upload: Downloads files from the 2 public websites described above and stores all files in S3.
+
 
 - events - Invocation events that you can use to invoke the function.
 
-- HelloWorldFunction/src/test - Unit tests for the application code. 
-
-- template.yaml - A template that defines the application's AWS resources.
+- template.yaml - A template that defines the application's AWS resources for the 3 Lambda Functions.
 
 The application uses several AWS resources, including Lambda functions and an API Gateway API. These resources are defined in the `template.yaml` file in this project. You can update the template to add AWS resources through the same deployment process that updates your application code.
 
