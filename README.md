@@ -23,8 +23,7 @@ git push -u origin main
 
 # ordersapi
 
-This project contains source code and supporting files for various serverless applications that you can deploy with the SAM CLI. 
-It includes the following files and folders.
+This project contains source code and supporting files for various serverless applications that you can deploy with the SAM CLI. It includes the following files and folders.
 
 # -S3Upload:  
 
@@ -40,13 +39,9 @@ and stores them in S3.  The bucket is publicly available.
 
 The policy page says:  BLS also reserves the right to block robots that do not contain information that can be used to contact the owner. Blocking may occur in real time.
 
-Adding a User-Agent header to the HTTP request with contact information will comply with the BLS data policies
+Adding a User-Agent header to the HTTP request with contact information will comply with the BLS data policies and allows programmatic access to their data.
 
- and allow you to keep accessing their data programmatically.
-
-The files in the S3 bucket are kept in sync with the source when data on the website is updated, added, or deleted.
-
-The app adds and/or removes files.
+The files in the S3 bucket are kept in sync with the source when data on the website is updated, added, or deleted.  The app adds and/or removes files.  
 
 The app downloads files from this public url also:  
 
