@@ -1,14 +1,22 @@
 git init
+
 git add README.md
+
 git commit -m "first commit"
+
 git branch -M main  (Switches the default master branch to main branch)
+
 git remote add origin git@github.com:monicamarshall/S3Upload.git
+
 git push -u origin main
 
 
 …or push an existing repository from the command line
+
 git remote add origin git@github.com:monicamarshall/S3Upload.git
+
 git branch -M main
+
 git push -u origin main
   
 
@@ -23,6 +31,7 @@ It includes the following files and folders.
 This springboot application is built, deployed, and run as a Lambda function.
 
 This springboot application downloads files from:
+
 https://download.bls.gov/pub/time.series/pr/
 
 and stores them in S3.  The bucket is publicly available.  
@@ -32,12 +41,16 @@ and stores them in S3.  The bucket is publicly available.
 The policy page says:  BLS also reserves the right to block robots that do not contain information that can be used to contact the owner. Blocking may occur in real time.
 
 Adding a User-Agent header to the HTTP request with contact information will comply with the BLS data policies
+
  and allow you to keep accessing their data programmatically.
 
 The files in the S3 bucket are kept in sync with the source when data on the website is updated, added, or deleted.
+
 The app adds and/or removes files.
 
-The app downloads files from this public url also:  https://honolulu-api.datausa.io/tesseract/data.jsonrecords?cube=acs_yg_total_population_1&drilldowns=Year%2CNation&locale=en&measures=Population
+The app downloads files from this public url also:  
+
+https://honolulu-api.datausa.io/tesseract/data.jsonrecords?cube=acs_yg_total_population_1&drilldowns=Year%2CNation&locale=en&measures=Population
 
 The population.json file is also uploaded to S3.
 
