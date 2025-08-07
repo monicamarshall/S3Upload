@@ -26,7 +26,7 @@ git push -u origin main
 This project contains source code and supporting files for various serverless applications that you can deploy with the SAM CLI. 
 It includes the following files and folders.
 
--S3Upload:  
+# -S3Upload:  
 
 This springboot application is built, deployed, and run as a Lambda function.
 
