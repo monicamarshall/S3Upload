@@ -168,6 +168,7 @@ Key                 S3UploadAPI
 Description         API Gateway URL to access S3UploadAPI
 
 Value               https://l1n4re01bk.execute-api.us-east-2.amazonaws.com/Prod/s3upload
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
