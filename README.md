@@ -117,6 +117,7 @@ Example output of successful sam build.  The output will give you the URLs to th
 
 Previewing CloudFormation changeset before deployment
 ======================================================
+
 Deploy this changeset? [y/N]: y
 
 2025-08-09 08:05:34 - Waiting for stack create/update to complete
@@ -157,11 +158,15 @@ Description         S3Upload Lambda Function IAM Role ARN
 Value               arn:aws:iam::828909213317:role/ordersapi-S3UploadFunctionRole-GOxnKcdpIt7h
 
 Key                 OrdersAPI
+
 Description         API Gateway URL to access OrdersAPI
+
 Value               https://l1n4re01bk.execute-api.us-east-2.amazonaws.com/Prod/orders
 
 Key                 S3UploadAPI
+
 Description         API Gateway URL to access S3UploadAPI
+
 Value               https://l1n4re01bk.execute-api.us-east-2.amazonaws.com/Prod/s3upload
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
