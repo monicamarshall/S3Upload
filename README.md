@@ -123,24 +123,64 @@ Deploy this changeset? [y/N]: y
 2025-08-09 08:05:34 - Waiting for stack create/update to complete
 
 CloudFormation events from stack operations (refresh every 5.0 seconds)
+
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-ResourceStatus                               ResourceType                                 LogicalResourceId                            ResourceStatusReason
+
+ResourceStatus                               ResourceType                                 
+LogicalResourceId                            ResourceStatusReason
+
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-UPDATE_IN_PROGRESS                           AWS::CloudFormation::Stack                   ordersapi                                    User Initiated
-UPDATE_IN_PROGRESS                           AWS::Lambda::Function                        ReadOrderFunction                            -
-UPDATE_IN_PROGRESS                           AWS::Lambda::Function                        S3UploadFunction                             -
-UPDATE_IN_PROGRESS                           AWS::Lambda::Function                        CreateOrderFunction                          -
-UPDATE_COMPLETE                              AWS::Lambda::Function                        S3UploadFunction                             -
-UPDATE_COMPLETE                              AWS::Lambda::Function                        ReadOrderFunction                            -
-UPDATE_COMPLETE                              AWS::Lambda::Function                        CreateOrderFunction                          -
-UPDATE_COMPLETE_CLEANUP_IN_PROGRESS          AWS::CloudFormation::Stack                   ordersapi                                    -
-UPDATE_COMPLETE                              AWS::CloudFormation::Stack                   ordersapi                                    -
+
+UPDATE_IN_PROGRESS                           AWS::CloudFormation::Stack                   
+
+ordersapi                                    User Initiated
+
+UPDATE_IN_PROGRESS                           AWS::Lambda::Function                        
+
+ReadOrderFunction                            -
+
+UPDATE_IN_PROGRESS                           AWS::Lambda::Function                        
+
+S3UploadFunction                             -
+
+
+UPDATE_IN_PROGRESS                           AWS::Lambda::Function                        
+
+CreateOrderFunction                          -
+
+UPDATE_COMPLETE                              AWS::Lambda::Function                        
+
+S3UploadFunction                             -
+
+UPDATE_COMPLETE                              AWS::Lambda::Function                        
+
+ReadOrderFunction                            -
+
+
+UPDATE_COMPLETE                              AWS::Lambda::Function                        
+
+CreateOrderFunction                          -
+
+
+UPDATE_COMPLETE_CLEANUP_IN_PROGRESS          AWS::CloudFormation::Stack                   
+
+ordersapi                                    -
+
+
+UPDATE_COMPLETE                              AWS::CloudFormation::Stack                   
+
+ordersapi     
+                               -
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 CloudFormation outputs from deployed stack
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 Outputs
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 Key                 CreateOrderFunctionARN
 Description         Create Order Lambda Function ARN
 Value               arn:aws:lambda:us-east-2:828909213317:function:ordersapi-CreateOrderFunction-NVwhUCQgzv46
