@@ -21,7 +21,7 @@ public class CreateOrderLambda {
 		} catch (JsonProcessingException e) {
 			System.out.println("Caught JsonProcessingException " + e.getMessage());
 		}
-		return new APIGatewayProxyResponseEvent().withStatusCode(200).withBody("Order Created!");
+		return new APIGatewayProxyResponseEvent().withStatusCode(200).withBody("Order Created successfully!");
 	}
 
 }

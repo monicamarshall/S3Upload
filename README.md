@@ -113,8 +113,60 @@ Build your application with the `sam build` command.
 ordersapi$ sam build
 ```
 
-Example output of successful sam build:
+Example output of successful sam build.  The output will give you the URLs to the Rest endpoints.
 
+Previewing CloudFormation changeset before deployment
+======================================================
+Deploy this changeset? [y/N]: y
+
+2025-08-09 08:05:34 - Waiting for stack create/update to complete
+
+CloudFormation events from stack operations (refresh every 5.0 seconds)
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ResourceStatus                               ResourceType                                 LogicalResourceId                            ResourceStatusReason
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+UPDATE_IN_PROGRESS                           AWS::CloudFormation::Stack                   ordersapi                                    User Initiated
+UPDATE_IN_PROGRESS                           AWS::Lambda::Function                        ReadOrderFunction                            -
+UPDATE_IN_PROGRESS                           AWS::Lambda::Function                        S3UploadFunction                             -
+UPDATE_IN_PROGRESS                           AWS::Lambda::Function                        CreateOrderFunction                          -
+UPDATE_COMPLETE                              AWS::Lambda::Function                        S3UploadFunction                             -
+UPDATE_COMPLETE                              AWS::Lambda::Function                        ReadOrderFunction                            -
+UPDATE_COMPLETE                              AWS::Lambda::Function                        CreateOrderFunction                          -
+UPDATE_COMPLETE_CLEANUP_IN_PROGRESS          AWS::CloudFormation::Stack                   ordersapi                                    -
+UPDATE_COMPLETE                              AWS::CloudFormation::Stack                   ordersapi                                    -
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CloudFormation outputs from deployed stack
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Outputs
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Key                 CreateOrderFunctionARN
+Description         Create Order Lambda Function ARN
+Value               arn:aws:lambda:us-east-2:828909213317:function:ordersapi-CreateOrderFunction-NVwhUCQgzv46
+
+Key                 CreateOrderFunctionIAMRole
+Description         Create Order Lambda Function IAM Role ARN
+Value               arn:aws:iam::828909213317:role/ordersapi-CreateOrderFunctionRole-v5u3tdh804LO
+
+Key                 S3UploadFunctionARN
+Description         S3Upload Lambda Function ARN
+Value               arn:aws:lambda:us-east-2:828909213317:function:ordersapi-S3UploadFunction-0MfTvLUOSXvB
+
+Key                 S3UploadFunctionIAMRole
+Description         S3Upload Lambda Function IAM Role ARN
+Value               arn:aws:iam::828909213317:role/ordersapi-S3UploadFunctionRole-GOxnKcdpIt7h
+
+Key                 OrdersAPI
+Description         API Gateway URL to access OrdersAPI
+Value               https://l1n4re01bk.execute-api.us-east-2.amazonaws.com/Prod/orders
+
+Key                 S3UploadAPI
+Description         API Gateway URL to access S3UploadAPI
+Value               https://l1n4re01bk.execute-api.us-east-2.amazonaws.com/Prod/s3upload
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Successfully created/updated stack - ordersapi in us-east-2
 
 
 The SAM CLI installs dependencies defined in `pom.xml`, creates a deployment package, and saves it in the `.aws-sam/build` folder.
