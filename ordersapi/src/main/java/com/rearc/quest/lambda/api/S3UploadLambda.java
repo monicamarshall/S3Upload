@@ -19,6 +19,6 @@ public class S3UploadLambda {
         logger.info("Completed upload of bls files");
         DataUsaService.uploadFilesToS3(DataUsaService.downloadPopulation());
         logger.info("Completed upload of datausa files");
-		return new APIGatewayProxyResponseEvent().withStatusCode(200).withBody("Upload to s3 complete!");
+		return new APIGatewayProxyResponseEvent().withStatusCode(200).withBody("bls-gov and datausa population files upload to s3 complete!");
     }
 }

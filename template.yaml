@@ -71,6 +71,7 @@ Resources:
               Action:
                 - s3:GetObject      # Allows reading file content & metadata
                 - s3:PutObject      # Allows writing files to the folder
+                - s3:DeleteObject
               Resource: !Sub "${MyS3Bucket.Arn}/bls-gov-datausa/*"
         - Statement:
             - Effect: Allow

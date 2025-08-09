@@ -1,3 +1,5 @@
+GIT INITIALIZATION AND README COMMIT
+
 git init
 
 git add README.md
@@ -18,12 +20,10 @@ git remote add origin git@github.com:monicamarshall/S3Upload.git
 git branch -M main
 
 git push -u origin main
-  
-
 
 # ordersapi
 
-This project contains source code and supporting files for various serverless applications that you can deploy with the SAM CLI. It includes the following files and folders.
+This project contains source code and supporting files for various serverless LAMBDA FUNCTION that you can deploy with the SAM CLI. The ordersapi offers 3 service endpoints (Refer to template.yaml for service endpoint configuration):
 
 # -S3Upload Lambda Function:  
 
@@ -49,12 +49,13 @@ https://honolulu-api.datausa.io/tesseract/data.jsonrecords?cube=acs_yg_total_pop
 
 The population.json file is also uploaded to S3.
 
-The ordersapi offers 3 service endpoints (Refer to template.yaml for service endpoint configuration):
+# -CreateOrderFunction:
 
-# -CreateOrderFunction:  This is a POST service that takes a json order and saves it in DynamoDB
-# -ReadOrderFunction:  This is a GET service that reads all Order objects from DynamoDB
-# -S3Upload: Downloads files from the 2 public websites described above and stores all files in S3.
+This is a POST service that takes a json order and saves it in DynamoDB
 
+# -ReadOrderFunction:  
+
+This is a GET service that reads all Order objects from DynamoDB
 
 - events - Invocation events that you can use to invoke the function.
 
@@ -83,7 +84,7 @@ The Serverless Application Model Command Line Interface (SAM CLI) is an extensio
 To use the SAM CLI, you need the following tools.
 
 * SAM CLI - [Install the SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html)
-* Java8 - [Install the Java SE Development Kit 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+* Java - [Install the Java SE Development Kit 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * Maven - [Install Maven](https://maven.apache.org/install.html)
 * Docker - [Install Docker community edition](https://hub.docker.com/search/?type=edition&offering=community)
 
@@ -112,14 +113,14 @@ Build your application with the `sam build` command.
 ordersapi$ sam build
 ```
 
-The SAM CLI installs dependencies defined in `HelloWorldFunction/pom.xml`, creates a deployment package, and saves it in the `.aws-sam/build` folder.
+The SAM CLI installs dependencies defined in `pom.xml`, creates a deployment package, and saves it in the `.aws-sam/build` folder.
 
 Test a single function by invoking it directly with a test event. An event is a JSON document that represents the input that the function receives from the event source. Test events are included in the `events` folder in this project.
 
 Run functions locally and invoke them with the `sam local invoke` command.
 
 ```bash
-ordersapi$ sam local invoke HelloWorldFunction --event events/event.json
+ordersapi$ sam local invoke XXXXXFunction --event events/event.json
 ```
 
 The SAM CLI can also emulate your application's API. Use the `sam local start-api` to run the API locally on port 3000.
@@ -150,18 +151,18 @@ To simplify troubleshooting, SAM CLI has a command called `sam logs`. `sam logs`
 `NOTE`: This command works for all AWS Lambda functions; not just the ones you deploy using SAM.
 
 ```bash
-ordersapi$ sam logs -n HelloWorldFunction --stack-name ordersapi --tail
+ordersapi$ sam logs -n XXXXXFunction --stack-name ordersapi --tail
 ```
 
 You can find more information and examples about filtering Lambda function logs in the [SAM CLI Documentation](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-logging.html).
 
 ## Unit tests
 
-Tests are defined in the `HelloWorldFunction/src/test` folder in this project.
+Tests are defined in the `XXXXXXFunction/src/test` folder in this project.
 
 ```bash
-ordersapi$ cd HelloWorldFunction
-HelloWorldFunction$ mvn test
+ordersapi$ cd XXXXXFunction
+XXXXXXFunction$ mvn test
 ```
 
 ## Cleanup
