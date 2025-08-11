@@ -9,6 +9,7 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.S3Event;
+import com.rearc.quest.lambda.api.config.S3ClientConfig;
 
 import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
 import software.amazon.awssdk.core.ResponseInputStream;
@@ -25,11 +26,9 @@ public class ReadOrderFromS3PubToSNSLambda implements RequestHandler<S3Event, Vo
 
 	private static final String TOPIC_ARN = System.getenv("SNS_TOPIC_ARN");
 
-	private static final S3Client s3 = S3Client.builder().region(REGION)
-			.credentialsProvider(DefaultCredentialsProvider.create()).build();
+	private static final S3Client s3 = S3ClientConfig.getS3Client();
 
-	private static final SnsClient sns = SnsClient.builder().region(REGION)
-			.credentialsProvider(DefaultCredentialsProvider.create()).build();
+	private static final SnsClient sns = SnsClient.builder().region(REGION).build();		
 
 	static {
 		if (TOPIC_ARN == null || TOPIC_ARN.isBlank()) {
