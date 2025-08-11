@@ -88,6 +88,7 @@ public class S3Service {
 
 		    // This is the correct v2 call
 		    s3Client.putObject(putRequest, filePath);
+		    
 		}
 	}
 

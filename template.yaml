@@ -13,7 +13,8 @@ Globals:
     Timeout: 30
     Environment: 
       Variables:
-        ORDERS_TABLE: !Ref OrdersTable  
+        ORDERS_TABLE: !Ref OrdersTable
+        REGION: !Ref AWS::Region  
 
 Resources:
   OrdersTable:
@@ -27,10 +28,45 @@ Resources:
     Type: AWS::S3::Bucket
     Properties:
       BucketName: "s3upload-lambda-bucket"
+  CreateOrderBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub ${AWS::StackName}-${AWS::AccountId}-${AWS::Region}
+  S3ReadOrderSNS:
+    Type: AWS::SNS::Topic
+    Properties:
+      TopicName: ReadFromS3PublishToSNS 
+  DebugQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: !Sub "ordersapi-sns-debug-${AWS::AccountId}-${AWS::Region}"
+  DebugQueuePolicy:
+    Type: AWS::SQS::QueuePolicy
+    Properties:
+      Queues:
+        - !Ref DebugQueue
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: AllowSNSToSend
+            Effect: Allow
+            Principal: "*"
+            Action: "sqs:SendMessage"
+            Resource: !GetAtt DebugQueue.Arn
+            Condition:
+              ArnEquals:
+                aws:SourceArn: !Ref S3ReadOrderSNS   # allow this topic to send
+
+  DebugSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      TopicArn: !Ref S3ReadOrderSNS
+      Protocol: sqs
+      Endpoint: !GetAtt DebugQueue.Arn
+      RawMessageDelivery: true  # see exact body without SNS envelope
       
 
   CreateOrderFunction:
-    #DependsOn: OrdersTable
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: ordersapi
@@ -38,15 +74,45 @@ Resources:
       Policies: 
         - DynamoDBCrudPolicy:
             TableName: !Ref OrdersTable
+        - S3WritePolicy:
+            BucketName: !Sub ${AWS::StackName}-${AWS::AccountId}-${AWS::Region}
+        - SNSPublishMessagePolicy:
+            # This policy expects the topic *name*, not ARN
+            TopicName: !GetAtt S3ReadOrderSNS.TopicName
+      Environment: 
+        Variables:
+          BUCKET_NAME: !Ref CreateOrderBucket
       Events:
         OrderEvents:
           Type: Api
           Properties:
             Path: /orders
             Method: POST
+            
+  ReadOrderFromS3PubToSNSFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: ordersapi
+      Handler: com.rearc.quest.lambda.api.ReadOrderFromS3PubToSNSLambda::handleRequest   
+      Policies: 
+        - S3ReadPolicy:
+            BucketName: !Sub ${AWS::StackName}-${AWS::AccountId}-${AWS::Region} 
+        - Statement:
+            - Effect: Allow
+              Action: sns:Publish
+              Resource: !Ref S3ReadOrderSNS   # Ref on SNS::Topic is the ARN 
+      Environment:
+        Variables:
+          SNS_TOPIC_ARN: !Ref S3ReadOrderSNS
+      Events:
+        S3Event:
+          Type: S3
+          Properties:
+            Bucket: !Ref CreateOrderBucket
+            Events: s3:ObjectCreated:*
+
 
   ReadOrderFunction:
-    #DependsOn: OrdersTable
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: ordersapi
@@ -100,6 +166,7 @@ Resources:
             Path: /s3upload
             Method: GET
 
+
 Outputs:
   OrdersAPI:
     Description: "API Gateway URL to access OrdersAPI"
@@ -119,6 +186,11 @@ Outputs:
   S3UploadFunctionIAMRole: 
     Description: "S3Upload Lambda Function IAM Role ARN"
     Value: !GetAtt S3UploadFunctionRole.Arn
+  DebugQueueUrl:
+    Description: "URL of the SQS queue receiving SNS messages"
+    Value: !Ref DebugQueue
+  
+  
   
 
       

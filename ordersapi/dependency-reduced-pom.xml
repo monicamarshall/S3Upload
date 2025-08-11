@@ -36,8 +36,21 @@
       </exclusions>
     </dependency>
   </dependencies>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>software.amazon.awssdk</groupId>
+        <artifactId>bom</artifactId>
+        <version>${aws.sdk.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <properties>
     <maven.compiler.target>17</maven.compiler.target>
+    <java.version>17</java.version>
     <maven.compiler.source>17</maven.compiler.source>
+    <aws.sdk.version>2.32.19</aws.sdk.version>
   </properties>
 </project>

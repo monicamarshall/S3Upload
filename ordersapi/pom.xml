@@ -10,8 +10,10 @@
 	<properties>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
+		<java.version>17</java.version>
+        <aws.sdk.version>2.32.19</aws.sdk.version>
 	</properties>
-
+	
 	<dependencies>
 		<!--
 		https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-dynamodb -->
@@ -31,7 +33,6 @@
 		<dependency>
 			<groupId>software.amazon.awssdk</groupId>
 			<artifactId>dynamodb</artifactId>
-			<version>2.32.11</version>
 		</dependency>
 		<!--
 		https://mvnrepository.com/artifact/com.amazonaws/aws-lambda-java-events -->
@@ -40,6 +41,8 @@
 			<artifactId>aws-lambda-java-events</artifactId>
 			<version>3.16.1</version>
 		</dependency>
+
+
 		<!--
 		https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
 		<dependency>
@@ -82,15 +85,17 @@
 		<dependency>
 			<groupId>software.amazon.awssdk</groupId>
 			<artifactId>s3</artifactId>
-			<version>2.32.4</version>
-			<scope>compile</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/software.amazon.awssdk/sns -->
+		<dependency>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>sns</artifactId>
 		</dependency>
 		<!--
 		https://mvnrepository.com/artifact/software.amazon.awssdk/secretsmanager -->
 		<dependency>
 			<groupId>software.amazon.awssdk</groupId>
 			<artifactId>secretsmanager</artifactId>
-			<version>2.32.4</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -99,7 +104,17 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
+<dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>software.amazon.awssdk</groupId>
+      <artifactId>bom</artifactId>
+      <version>${aws.sdk.version}</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+  </dependencies>
+</dependencyManagement>
 	<build>
 		<plugins>
 			<plugin>
